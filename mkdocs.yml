@@ -1,3 +1,29 @@
 site_name: PolarGeosAI
 theme:
-  name: gitbook
+  logo: img/terminal.svg
+  name: material
+  palette: 
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+
+    # Palette toggle for light mode
+    - scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-7 
+
+
+        name: Switch to dark mode
+  features:
+    - content.code.annotation
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
