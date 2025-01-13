@@ -751,7 +751,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="user-guide">User Guide<a class="anchor-link" href="#user-guide">¶</a></h1><p>This notebook will show an example of how the PolarGeosAI package can be used to extract GOES images from scatterometer pixel information.</p>
+<h1 id="user-guide">User Guide<a class="anchor-link" href="#user-guide">¶</a></h1><p>This notebook will show an example of how the PolarGeosAI package can be used to extract GOES images from scatterometer pixel information. 
+The first step is to download the scatterometer data. This can be done using links provided in the documentation. Once the download is completed, the scatterometer data can be imported :</p>
 </div>
 </div>
 </div>
@@ -778,15 +779,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
 
-<span class="kn">from</span> <span class="nn">test_function</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">func</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">PolarGeosAI</span> <span class="k">as</span> <span class="nn">pga</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-1">import numpy as np
 import matplotlib.pyplot as plt
 import xarray as xr
 
-from test_function import *
-from func import *</div>
+import PolarGeosAI as pga</div>
 </div>
 </div>
 </div>
@@ -802,17 +801,6 @@ from func import *</div>
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The first step is to download the scatterometer data. This can be done using links provided in the documentation. Once the download is completed, the scatterometer data can be imported :</p>
 </div>
 </div>
 </div>
@@ -837,12 +825,12 @@ from func import *</div>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># importing the data</span>
 <span class="n">polar_data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span>
-    <span class="s1">'../polar_data/cmems_obs-wind_glo_phy_nrt_l3-hy2c-hscat-asc-0.25deg_P1D-i-2020_2024.nc'</span>
+    <span class="s1">'../../../GOES_ML_DOLDRUM/Branch-updatefilesystem/Github-GOES-ML/data/Scatterometers/cmems_obs-wind_glo_phy_nrt_l3-hy2c-hscat-asc-0.25deg_P1D-i-2020_2024.nc'</span>
     <span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-2"># importing the data
 polar_data = xr.open_dataset(
-    '../polar_data/cmems_obs-wind_glo_phy_nrt_l3-hy2c-hscat-asc-0.25deg_P1D-i-2020_2024.nc'
+    '../../../GOES_ML_DOLDRUM/Branch-updatefilesystem/Github-GOES-ML/data/Scatterometers/cmems_obs-wind_glo_phy_nrt_l3-hy2c-hscat-asc-0.25deg_P1D-i-2020_2024.nc'
     )</div>
 </div>
 </div>
@@ -887,7 +875,7 @@ polar_data = xr.open_dataset(
 <span class="n">lat_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
 <span class="n">lon_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">]</span>
 
-<span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span> <span class="n">observation_windspeeds</span> <span class="o">=</span> <span class="n">extract_scatter</span><span class="p">(</span>
+<span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span> <span class="n">observation_windspeeds</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">extract_scatter</span><span class="p">(</span>
     <span class="n">polar_data</span><span class="o">=</span><span class="n">polar_data</span><span class="p">,</span>
     <span class="n">start_datetime</span><span class="o">=</span><span class="n">start_datetime</span><span class="p">,</span>
     <span class="n">end_datetime</span><span class="o">=</span><span class="n">end_datetime</span><span class="p">,</span>
@@ -904,7 +892,7 @@ end_datetime = "2022-01-01 12:00:00"
 lat_range = [-90, 90]
 lon_range = [-180, 180]
 
-observation_times, observation_lats, observation_lons, observation_windspeeds = extract_scatter(
+observation_times, observation_lats, observation_lons, observation_windspeeds = pga.extract_scatter(
     polar_data=polar_data,
     start_datetime=start_datetime,
     end_datetime=end_datetime,
@@ -981,7 +969,7 @@ observation_times, observation_lats, observation_lons, observation_windspeeds = 
 
 
 <span class="c1"># use the function to extract all images corresponding to the observation data from the scatterometer</span>
-<span class="n">images</span> <span class="o">=</span> <span class="n">extract_goes</span><span class="p">(</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">extract_goes</span><span class="p">(</span>
     <span class="n">observation_times</span><span class="p">,</span>
     <span class="n">observation_lats</span><span class="p">,</span>
     <span class="n">observation_lons</span><span class="p">,</span>
@@ -1003,7 +991,7 @@ channels = ["C01"]
 
 
 # use the function to extract all images corresponding to the observation data from the scatterometer
-images = extract_goes(
+images = pga.extract_goes(
     observation_times,
     observation_lats,
     observation_lons,
@@ -1093,14 +1081,14 @@ into solar zenith and solar azimuth angles</p>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Package the data to be used in the model</span>
-<span class="n">images_packaged</span><span class="p">,</span> <span class="n">numerical_data_packaged</span> <span class="o">=</span> <span class="n">package_data</span><span class="p">(</span>
+<span class="n">images_packaged</span><span class="p">,</span> <span class="n">numerical_data_packaged</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">package_data</span><span class="p">(</span>
     <span class="n">images</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span> <span class="n">observation_times</span><span class="p">,</span><span class="n">observation_windspeeds</span><span class="p">,</span><span class="nb">filter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solar_conversion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Check if the data is correctly packaged</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images_packaged</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">numerical_data_packaged</span><span class="p">))</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5"># Package the data to be used in the model
-images_packaged, numerical_data_packaged = package_data(
+images_packaged, numerical_data_packaged = pga.package_data(
     images, observation_lats, observation_lons, observation_times,observation_windspeeds,filter=True, solar_conversion=True)
 
 # Check if the data is correctly packaged
@@ -1159,10 +1147,10 @@ returning images, numerical_data
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># save the data as a single .npz file</span>
-<span class="n">save_data</span><span class="p">(</span><span class="n">images_packaged</span><span class="p">,</span> <span class="n">numerical_data_packaged</span><span class="p">,</span> <span class="n">polar_data</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+<span class="n">pga</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">images_packaged</span><span class="p">,</span> <span class="n">numerical_data_packaged</span><span class="p">,</span> <span class="n">polar_data</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6"># save the data as a single .npz file
-save_data(images_packaged, numerical_data_packaged, polar_data, start_datetime, end_datetime, channels)</div>
+pga.save_data(images_packaged, numerical_data_packaged, polar_data, start_datetime, end_datetime, channels)</div>
 </div>
 </div>
 </div>
@@ -1369,7 +1357,7 @@ plt.show()</div>
     <span class="n">channels</span> <span class="o">=</span> <span class="n">channels</span>
 
     <span class="c1"># Extract the scatterometer data</span>
-    <span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span><span class="n">observation_windspeed</span> <span class="o">=</span> <span class="n">extract_scatter</span><span class="p">(</span>
+    <span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span><span class="n">observation_windspeed</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">extract_scatter</span><span class="p">(</span>
         <span class="n">polar_data</span><span class="o">=</span><span class="n">polar_data</span><span class="p">,</span>
         <span class="n">start_datetime</span><span class="o">=</span><span class="n">start_datetime</span><span class="p">,</span>
         <span class="n">end_datetime</span><span class="o">=</span><span class="n">end_datetime</span><span class="p">,</span>
@@ -1379,7 +1367,7 @@ plt.show()</div>
     <span class="p">)</span>
 
     <span class="c1"># Extract the GOES data from the scatterometer obersvation data</span>
-    <span class="n">images</span> <span class="o">=</span> <span class="n">extract_goes</span><span class="p">(</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">extract_goes</span><span class="p">(</span>
         <span class="n">observation_times</span><span class="p">,</span>
         <span class="n">observation_lats</span><span class="p">,</span>
         <span class="n">observation_lons</span><span class="p">,</span>
@@ -1392,11 +1380,11 @@ plt.show()</div>
     <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">observation_lats</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">observation_lons</span><span class="p">))</span>
 
-    <span class="n">images</span><span class="p">,</span> <span class="n">numerical_data</span> <span class="o">=</span> <span class="n">package_data</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span> <span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_windspeed</span><span class="p">,</span><span class="nb">filter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solar_conversion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">images</span><span class="p">,</span> <span class="n">numerical_data</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">package_data</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">observation_lats</span><span class="p">,</span> <span class="n">observation_lons</span><span class="p">,</span> <span class="n">observation_times</span><span class="p">,</span> <span class="n">observation_windspeed</span><span class="p">,</span><span class="nb">filter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solar_conversion</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">numerical_data</span><span class="p">))</span>
 
     <span class="c1"># Save the data</span>
-    <span class="n">save_data</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">numerical_data</span><span class="p">,</span> <span class="n">polar_data</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+    <span class="n">pga</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">numerical_data</span><span class="p">,</span> <span class="n">polar_data</span><span class="p">,</span> <span class="n">start_datetime</span><span class="p">,</span> <span class="n">end_datetime</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-9">def full_workflow_per_channel(channels):
         
@@ -1413,7 +1401,7 @@ plt.show()</div>
     channels = channels
 
     # Extract the scatterometer data
-    observation_times, observation_lats, observation_lons,observation_windspeed = extract_scatter(
+    observation_times, observation_lats, observation_lons,observation_windspeed = pga.extract_scatter(
         polar_data=polar_data,
         start_datetime=start_datetime,
         end_datetime=end_datetime,
@@ -1423,7 +1411,7 @@ plt.show()</div>
     )
 
     # Extract the GOES data from the scatterometer obersvation data
-    images = extract_goes(
+    images = pga.extract_goes(
         observation_times,
         observation_lats,
         observation_lons,
@@ -1436,11 +1424,11 @@ plt.show()</div>
     print(np.shape(observation_lats))
     print(np.shape(observation_lons))
 
-    images, numerical_data = package_data(images, observation_lats, observation_lons, observation_times, observation_windspeed,filter=True, solar_conversion=True)
+    images, numerical_data = pga.package_data(images, observation_lats, observation_lons, observation_times, observation_windspeed,filter=True, solar_conversion=True)
     print(np.shape(images), np.shape(numerical_data))
 
     # Save the data
-    save_data(images, numerical_data, polar_data, start_datetime, end_datetime, channels)</div>
+    pga.save_data(images, numerical_data, polar_data, start_datetime, end_datetime, channels)</div>
 </div>
 </div>
 </div>
@@ -1510,13 +1498,13 @@ plt.show()</div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-11">
@@ -1529,54 +1517,15 @@ plt.show()</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'../run_model/'</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">channel</span> <span class="o">=</span> <span class="s2">"C01"</span>
 
-<span class="kn">from</span> <span class="nn">run_function</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="o">%</span><span class="n">reload_ext</span> <span class="n">autoreload</span>
-<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+<span class="n">file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"./output_processed_data/processed_HSCAT-L3-25km___</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">___2022-01-01_00_00_00_2022-01-01_12_00_00.npz"</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">pga</span><span class="o">.</span><span class="n">train_multi_input_model</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-11">import sys
-sys.path.append('../run_model/')
+<div class="clipboard-copy-txt" id="cell-11">channel = "C01"
 
-from run_function import *
-
-%reload_ext autoreload
-%autoreload 2</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="CodeMirror cm-s-jupyter">
-<div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
-<div>
-<span class="notice" hidden="">Copied!</span>
-<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
-<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-</clipboard-copy>
-</div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">channel</span> <span class="o">=</span> <span class="s1">'C01'</span>
-
-<span class="n">file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"../function_extract/output_processed_data/processed_HSCAT-L3-25km_['</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">']_2022-01-01_2022-01-01.npz"</span>
-<span class="n">score</span> <span class="o">=</span> <span class="n">train_multi_input_model</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-</pre></div>
-<div class="clipboard-copy-txt" id="cell-12">channel = 'C01'
-
-file = f"../function_extract/output_processed_data/processed_HSCAT-L3-25km_['{channel}']_2022-01-01_2022-01-01.npz"
-score = train_multi_input_model(file)</div>
+file = f"./output_processed_data/processed_HSCAT-L3-25km___{channel}___2022-01-01_00_00_00_2022-01-01_12_00_00.npz"
+score = pga.train_multi_input_model(file)</div>
 </div>
 </div>
 </div>
@@ -2276,7 +2225,7 @@ Test Loss: 1.3976077288389206
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
-<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-13">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-12">
 <div>
 <span class="notice" hidden="">Copied!</span>
 <svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
@@ -2288,7 +2237,7 @@ Test Loss: 1.3976077288389206
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-13"></div>
+<div class="clipboard-copy-txt" id="cell-12"></div>
 </div>
 </div>
 </div>

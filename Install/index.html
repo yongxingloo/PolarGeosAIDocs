@@ -258,7 +258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../User%20Guide/" class="md-nav__link">
+      <a href="../UserGuide/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -345,10 +345,11 @@
 
 
 <h1 id="install">Install</h1>
-<p>PolarGeosAI can be installed via pip from PyPI</p>
-<pre><code>pip install polargeosai
+<p>PolarGeosAI can be installed via pip from PyPI.</p>
+<p><em>because of <a href="https://pytorch.org/">pytorch </a>dependency, this package only works with python 3.10 and below</em></p>
+<pre><code>pip install PolarGeosAI==0.0.1
 </code></pre>
-<p>(The package has not been uploaded yet, this will not work.)</p>
+<p>(latest version : <a href="https://pypi.org/project/PolarGeosAI/0.0.1/">0.0.1</a>)</p>
 <h1 id="dependencies">Dependencies</h1>
 <p>This package requires the following dependencies :</p>
 <table>
@@ -360,40 +361,52 @@
 </thead>
 <tbody>
 <tr>
-<td>Numpy</td>
-<td></td>
+<td><a href="https://numpy.org/">Numpy</a></td>
+<td>2.2.1</td>
 </tr>
 <tr>
-<td>Pandas</td>
-<td></td>
+<td><a href="https://pandas.pydata.org/">Pandas</a></td>
+<td>2.2.3</td>
 </tr>
 <tr>
-<td>fsspec</td>
-<td></td>
+<td><a href="https://filesystem-spec.readthedocs.io/en/latest/">fsspec</a></td>
+<td>2024.12.0</td>
 </tr>
 <tr>
-<td>s3fs</td>
-<td></td>
+<td><a href="https://github.com/s3fs-fuse/s3fs-fuse">s3fs</a></td>
+<td>2024.12.0</td>
 </tr>
 <tr>
-<td>xarray</td>
-<td></td>
+<td><a href="https://docs.xarray.dev/en/stable/">xarray</a></td>
+<td>2025.1.1</td>
 </tr>
 <tr>
-<td>sklearn</td>
-<td></td>
+<td><a href="https://github.com/tqdm/tqdm">tqdm</a></td>
+<td>4.67.1</td>
 </tr>
 <tr>
-<td>tqdm</td>
-<td></td>
+<td><a href="https://github.com/pingswept/pysolar">pysolar</a></td>
+<td>0.13</td>
 </tr>
 <tr>
-<td>pysolar</td>
-<td></td>
+<td><a href="https://matplotlib.org/">matplotlib</a></td>
+<td>3.10.0</td>
 </tr>
 <tr>
-<td>Matplotlib</td>
-<td></td>
+<td><a href="https://h5netcdf.org/index.html">h5netcdf</a></td>
+<td>1.4.1</td>
+</tr>
+<tr>
+<td><a href="https://pytorch.org/">torch</a></td>
+<td>2.5.1</td>
+</tr>
+<tr>
+<td><a href="https://scikit-learn.org">scikit</a>-<a href="https://scikit-learn.org">learn</a></td>
+<td>1.6.1</td>
+</tr>
+<tr>
+<td><a href="https://unidata.github.io/netcdf4-python/">netCDF4</a></td>
+<td>1.7.2</td>
 </tr>
 </tbody>
 </table>
